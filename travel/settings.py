@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'django_extensions',
     'cities',
+    'trains',
+    'routes',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -114,6 +117,69 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'filters': {
+        # 'special': {
+        #     '()': 'project.logging.SpecialFilter',
+        #     'foo': 'bar',
+        # },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        # 'mail_admins': {
+        #     'level': 'ERROR',
+        #     'class': 'django.utils.log.AdminEmailHandler',
+        #     'filters': ['special']
+        # },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR.joinpath('log/application.log'),
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        # 'myproject.custom': {
+        #     'handlers': ['console', 'mail_admins'],
+        #     'level': 'INFO',
+        #     'filters': ['special']
+        # },
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['file'],
+        }
+
+    }
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

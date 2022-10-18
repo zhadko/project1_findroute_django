@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Route detail{% endblock %}
+
+{% block content %}
+<h1>Route detail</h1>
+<div class="row">
+    <div class="col-md-10 mx-auto my-2">
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Travel time</th>
+                <th>List trains of route</th>
+            </tr>
+            <tr>
+                <td>
+                    {{object.name}}
+                </td>
+                <td>{{ object.from_city }}</td>
+                <td>{{ object.to_city }}</td>
+                <td>{{ object.travel_time }}</td>
+                <td>
+                    {% for train in object.trains.all %}
+                        <p>{{ train }}, travel time = {{ train.travel_time }}</p>
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}

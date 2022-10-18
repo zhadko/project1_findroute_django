@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Register form{% endblock %}
+
+{% block content %}
+<h1>Welcome, {{ new_user.username }}</h1>
+
+<p>You are successfully registered. You can now <a href="{% url 'accounts:login'%}">log in</a> to your account</p>
+
+{% endblock %}
