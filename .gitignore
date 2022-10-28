@@ -1,5 +1,6 @@
 # Django #
 *.log
+local_settings.py
 *.pot
 *.pyc
 __pycache__
